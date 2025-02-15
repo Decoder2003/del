@@ -29,10 +29,7 @@ const swaggerOptions = {
 };
 
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
-app.get("/api-docs", (req, res) => {
-    const swaggerHTML = swaggerUi.generateHTML(swaggerSpec);
-    res.send(swaggerHTML);
-});
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec, { customCssUrl: "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui.css" }));
 
 /**
  * @swagger
