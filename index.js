@@ -29,7 +29,10 @@ const swaggerOptions = {
 };
 
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.get("/api-docs", (req, res) => {
+    const swaggerHTML = swaggerUi.generateHTML(swaggerSpec);
+    res.send(swaggerHTML);
+});
 
 /**
  * @swagger
